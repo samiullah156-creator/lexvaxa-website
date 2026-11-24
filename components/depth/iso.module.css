@@ -1,0 +1,70 @@
+/* Shared isometric materials. Light comes from the top left: top faces brightest, right faces darkest. */
+.scene { display: block; width: 100%; height: auto; overflow: visible; }
+.scene polygon, .scene path, .scene ellipse { stroke-linejoin: round; stroke-width: .8; }
+
+.white .top { fill: #ffffff; stroke: #b9c6d3; }
+.white .left { fill: #eef2f7; stroke: #b9c6d3; }
+.white .right { fill: #d3dde7; stroke: #a9b8c7; }
+.steel .top { fill: #e6ecf1; stroke: #9eacba; }
+.steel .left { fill: #c7d1db; stroke: #9eacba; }
+.steel .right { fill: #a9b6c3; stroke: #8b9aa9; }
+.blue .top { fill: #5fa5ff; stroke: #0b5fcc; }
+.blue .left { fill: #167dfe; stroke: #0b5fcc; }
+.blue .right { fill: #0b5fcc; stroke: #08489c; }
+.purple .top { fill: #b985ff; stroke: #6d1ec6; }
+.purple .left { fill: #9533fa; stroke: #6d1ec6; }
+.purple .right { fill: #7420d4; stroke: #5a16a8; }
+.ink .top { fill: #3a3346; stroke: #16111d; }
+.ink .left { fill: #241d2f; stroke: #16111d; }
+.ink .right { fill: #16111d; stroke: #0c0910; }
+
+.shadow { fill: #0d203c; opacity: .1; filter: blur(7px); }
+.guide { fill: none; stroke: #167dfe; stroke-width: 1.2; stroke-dasharray: 3 5; opacity: .45; }
+.grid { fill: none; stroke: #5fa5ff; stroke-width: .6; opacity: .38; }
+.corner { fill: none; stroke: #167dfe; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.edge { fill: none; stroke: #ffffff; stroke-width: .9; stroke-linecap: round; opacity: .7; }
+.white .edge { opacity: 0; }
+.ground { fill: #0d203c; stroke: none; opacity: .09; }
+.cell { fill: #e6ecf1; stroke: #b9c6d3; stroke-width: .5; }
+.paper { fill: #ffffff; stroke: #b9c6d3; stroke-width: .7; }
+.path { fill: #e9eef5; stroke: #c7d1db; stroke-width: .6; }
+.ring { fill: none; stroke: #9533fa; stroke-width: 1.4; }
+.ringBlue { fill: #5fa5ff; stroke: #0b5fcc; stroke-width: .8; }
+.ringWhite { fill: #ffffff; stroke: #b9c6d3; stroke-width: .8; }
+.ringPurple { fill: #9533fa; stroke: #6d1ec6; stroke-width: .8; }
+.tyre { fill: #241d2f; stroke: #0c0910; }
+.hub { fill: #c7d1db; stroke: #8b9aa9; }
+
+/* Shared accents */
+.line { fill: none; stroke: #b9c6d3; stroke-width: 1.6; stroke-linecap: round; }
+.lineBlue { fill: none; stroke: #5fa5ff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.lineWhite { fill: none; stroke: #ffffff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.wire { fill: none; stroke: #8b9aa9; stroke-width: 1.2; }
+.dash { fill: none; stroke: #9533fa; stroke-width: 1.3; stroke-dasharray: 2 3; stroke-linecap: round; }
+.led { fill: #5fa5ff; }
+.ledPurple { fill: #b985ff; }
+.ledGreen { fill: #34d399; }
+.glass { fill: #1d1726; stroke: #0c0910; stroke-width: .8; }
+
+/* Motion: one gentle loop per scene, nothing that pulls focus. */
+.float { animation: float 5.2s ease-in-out infinite; }
+.floatLate { animation: float 5.2s ease-in-out -2.6s infinite; }
+.blink { animation: blink 2.4s steps(2, jump-none) infinite; }
+.blinkLate { animation: blink 2.4s steps(2, jump-none) -1.2s infinite; }
+.sway { animation: sway 4.8s ease-in-out infinite; transform-box: view-box; }
+.draw { stroke-dasharray: 220; stroke-dashoffset: 220; animation: draw 3.6s ease-in-out infinite; }
+.pulse { transform-box: fill-box; transform-origin: 50% 50%; animation: pulse 2.6s ease-out infinite; }
+.grow { transform-box: fill-box; transform-origin: 50% 100%; animation: grow 3.6s cubic-bezier(.3, .7, .3, 1) infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+@keyframes sway { 0%, 100% { transform: rotate(0deg); } 30% { transform: rotate(-2.4deg); } 70% { transform: rotate(2.4deg); } }
+@keyframes draw { 0% { stroke-dashoffset: 220; } 50%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -220; } }
+@keyframes pulse { 0% { transform: scale(.5); opacity: .9; } 100% { transform: scale(1.6); opacity: 0; } }
+@keyframes grow { 0% { transform: scaleY(.2); } 40%, 100% { transform: scaleY(1); } }
+
+.scene[data-still='true'], .scene[data-still='true'] * { animation: none !important; }
+.scene[data-still='true'] .draw { stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .scene * { animation: none !important; }
+  .draw { stroke-dashoffset: 0; }
+}

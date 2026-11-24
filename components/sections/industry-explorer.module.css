@@ -1,0 +1,71 @@
+.explorer { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: #fff; box-shadow: 0 30px 60px -50px #167dfe66; }
+.tabs { display: flex; gap: 4px; overflow-x: auto; padding: 0 12px; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { position: relative; display: inline-flex; flex: none; align-items: center; gap: 10px; min-height: 64px; padding: 0 16px; border: 0; background: none; color: #4d5866; font: 600 .95rem/1.2 var(--font-sans, system-ui); cursor: pointer; transition: color 160ms; }
+.tab::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 3px; border-radius: 3px 3px 0 0; background: var(--brand-blue); transform: scaleX(0); transition: transform 220ms cubic-bezier(.3,.7,.3,1); }
+.tab:hover, .tab[aria-selected='true'] { color: var(--brand-blue-strong); }
+.tab[aria-selected='true']::after { transform: scaleX(1); }
+.tab:focus-visible { outline: 3px solid #b0d5ff; outline-offset: -3px; }
+.panel { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: start; gap: clamp(20px, 4vw, 48px); padding: clamp(22px, 3.5vw, 40px); animation: panelIn 420ms cubic-bezier(.3,.7,.3,1) both; }
+@keyframes panelIn { from { opacity: 0; transform: translateY(10px); } }
+.copy { min-width: 0; }
+.kicker { margin: 0 0 10px; color: var(--brand-blue-strong); font: 600 .72rem/1.6 var(--font-code); letter-spacing: .08em; text-transform: uppercase; }
+.copy h3 { margin: 0 0 12px; font-size: clamp(1.6rem, 2.6vw, 2.2rem); letter-spacing: -.035em; }
+.answer { margin: 0 0 20px; color: var(--muted); font-size: .98rem; line-height: 1.75; }
+.cases { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0 0 22px; padding: 0; list-style: none; }
+.cases li { display: grid; grid-template-columns: 22px minmax(0, 1fr); align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid #e3ebf6; border-radius: 14px; background: #f8fbff; color: var(--muted); font-size: .86rem; line-height: 1.55; transition: border-color 160ms, background-color 160ms, transform 220ms cubic-bezier(.3,.7,.3,1.2); }
+.cases li:hover { border-color: var(--brand-blue-light); background: #fff; transform: translateY(-3px); }
+.cases li > svg { margin-top: 0; padding: 3px; width: 22px; height: 22px; border-radius: 7px; background: var(--brand-blue-soft); color: var(--brand-blue-strong); }
+.cases b { display: block; margin-bottom: 0; color: var(--brand-ink); font-size: .92rem; }
+.cta { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 6px 0 18px; border: 1px solid #d5e2f3; border-radius: 10px; background: #f5f9ff; color: var(--brand-ink); font-weight: 650; text-decoration: none; transition: border-color 160ms, transform 200ms; }
+.cta > span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 8px; background: var(--brand-blue-strong); color: #fff; }
+.cta:is(:hover, :focus-visible) { border-color: var(--brand-blue); transform: translateY(-2px); }
+.side { display: grid; gap: 14px; min-width: 0; }
+.visual { min-width: 0; margin: -10px 0 -24px; }
+@media (max-width: 860px) { .panel { grid-template-columns: minmax(0, 1fr); } .side { order: -1; } .visual { max-width: 460px; } }
+@media (max-width: 560px) { .cases { grid-template-columns: minmax(0, 1fr); } }
+/* Text builds in line by line each time a sector is selected; the model glides in alongside. */
+.copy > *, .cases li { animation: textIn 520ms cubic-bezier(.2,.75,.25,1) both; }
+.copy h3 { animation-name: titleIn; animation-delay: 60ms; }
+.copy .answer { animation-delay: 140ms; }
+.cases li { animation-delay: calc(220ms + var(--i, 0) * 70ms); }
+.copy .cases { animation: none; }
+.copy .cta { animation-delay: 480ms; }
+.side .visual { animation: visualIn 700ms cubic-bezier(.2,.75,.25,1) both 80ms; }
+@keyframes textIn { from { opacity: 0; transform: translateY(12px); } }
+@keyframes titleIn { from { opacity: 0; transform: translateY(18px); clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 -20% 0); } }
+@keyframes visualIn { from { opacity: 0; transform: translateX(28px) scale(.96); } }
+@media (prefers-reduced-motion: reduce) { .panel, .copy > *, .cases li, .visual { animation: none; } .cases li { transition: none; } .tab::after, .cta { transition: none; } }
+
+/* Compact home layout: copy on the left, the industry object on the right. */
+.panel { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: center; padding: clamp(20px, 3vw, 32px); }
+.tab { min-height: 56px; font-size: .9rem; }
+.copy h3 { font-size: clamp(1.4rem, 2.2vw, 1.8rem); }
+.answer { margin-bottom: 16px; font-size: .95rem; line-height: 1.65; }
+.cases { margin-bottom: 18px; }
+.cases li { padding: 10px 12px; }
+.cases b { font-size: .86rem; }
+.visual { max-width: 300px; margin: 0 auto; }
+@media (max-width: 860px) { .visual { max-width: 240px; } }
+
+
+/* Tab strip with arrows: ten sectors do not fit in one row, so the strip scrolls sideways (swipe,
+   trackpad or arrows), fades at whichever edge has more, and keeps the selected tab in view. */
+.tabBar { display: flex; align-items: center; gap: 6px; padding: 0 10px; border-bottom: 1px solid var(--line); }
+.tabBar .tabs { flex: 1; min-width: 0; padding: 0 4px; border-bottom: 0; scroll-snap-type: x proximity; }
+.tabBar .tab { scroll-snap-align: center; }
+.tabBar[data-start='false'][data-end='false'] .tabs { -webkit-mask-image: url('/media/fade-x.svg'); mask-image: url('/media/fade-x.svg'); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; }
+.stepButton { display: grid; flex: none; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid #d8e3f1; border-radius: 50%; background: #fff; color: var(--brand-ink); cursor: pointer; transition: border-color 160ms, color 160ms, background-color 160ms; }
+.stepButton:hover, .stepButton:focus-visible { border-color: var(--brand-blue-strong); background: var(--brand-blue-soft); color: var(--brand-blue-strong); }
+.stepButton:focus-visible { outline: 2px solid var(--brand-blue-strong); outline-offset: 2px; }
+.count { flex: none; min-width: 58px; color: var(--muted); font: 600 .7rem/1 var(--font-code); letter-spacing: .08em; text-align: right; }
+@media (max-width: 600px) { .tabBar { padding: 0 6px; gap: 4px; } .count { display: none; } .stepButton { width: 32px; height: 32px; } }
+@media (prefers-reduced-motion: reduce) { .stepButton { transition: none; } }
+/* Phones and small tablets: one column, the industry object above the copy (restated after the compact
+   layout above, which would otherwise keep two columns). */
+@media (max-width: 860px) {
+  .panel { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .side { order: -1; }
+  .visual { max-width: 220px; }
+}
+@media (max-width: 560px) { .cases { grid-template-columns: minmax(0, 1fr); } }

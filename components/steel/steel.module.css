@@ -1,0 +1,108 @@
+/* Shared motion vocabulary for every steel scene. */
+.scene { display: block; width: 100%; height: auto; overflow: visible; }
+
+/* Staged build (service stories) */
+.part { transition: opacity 360ms ease, transform 520ms cubic-bezier(.3,.7,.3,1); }
+.part[data-on='false'] { opacity: 0; transform: translateY(-18px); }
+.part[data-ghost='true'] { opacity: .18; transform: none; }
+/* Assembly from scratch: the blueprint lines draw first, then a drone carries each band of the object in,
+   lowers it into place (contact glow), releases it and flies off; a light sweep finishes the object. */
+.scene[data-assemble='true'] .part[data-on='true'] { animation: assemble 900ms cubic-bezier(.3,.65,.35,1) both; animation-delay: calc(700ms + var(--n) * 560ms); }
+@keyframes assemble { 0% { opacity: .16; transform: none; } 2% { opacity: 1; transform: translateY(-58px); } 70% { opacity: 1; transform: translateY(1px); } 100% { opacity: 1; transform: none; } }
+.drone, .spark, .sweepLight { display: none; }
+.scene[data-assemble='true'] .drone { display: inline; animation: droneFlight 1600ms cubic-bezier(.45,.05,.35,1) both; animation-delay: calc(220ms + var(--n) * 560ms); }
+@keyframes droneFlight {
+  0% { opacity: 0; transform: translate(var(--dx), -150px) rotate(var(--tilt)); }
+  8% { opacity: 1; }
+  30% { transform: translate(0, -58px) rotate(calc(var(--tilt) * .35)); }
+  70%, 78% { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+  100% { opacity: 0; transform: translate(calc(var(--dx) * -1), -230px) rotate(calc(var(--tilt) * -1)); }
+}
+.drone { transform-box: fill-box; transform-origin: 50% 40%; }
+.tether { stroke: #8fa6c2; stroke-width: 1.6; stroke-dasharray: 3 2; }
+.downwash { fill: #167dfe; opacity: 0; }
+.scene[data-assemble='true'] .tether { animation: tether 1600ms linear both; animation-delay: calc(220ms + var(--n) * 560ms); }
+.scene[data-assemble='true'] .downwash { animation: downwash 1600ms ease-out both; animation-delay: calc(220ms + var(--n) * 560ms); }
+@keyframes tether { 0%, 20% { opacity: 0; } 28%, 74% { opacity: 1; } 80%, 100% { opacity: 0; } }
+@keyframes downwash { 0%, 40% { opacity: 0; } 62%, 74% { opacity: .22; } 86%, 100% { opacity: 0; } }
+.scene[data-assemble='true'] .spark { display: inline; transform-box: fill-box; transform-origin: center; animation: spark 650ms ease-out both; animation-delay: calc(1260ms + var(--n) * 560ms); }
+@keyframes spark { 0% { opacity: 0; transform: scale(.35); } 30% { opacity: .55; } 100% { opacity: 0; transform: scale(1.5); } }
+.scene[data-assemble='true'] .sweepLight { display: inline; animation: sweepLight 1100ms cubic-bezier(.4,0,.2,1) both; animation-delay: 4400ms; }
+@keyframes sweepLight { 0% { opacity: 0; transform: skewX(-18deg) translateX(0); } 15% { opacity: 1; } 100% { opacity: 0; transform: skewX(-18deg) translateX(860px); } }
+.blueprint { opacity: 0; pointer-events: none; }
+.scene[data-assemble='true'] .blueprint { animation: blueprint 4.4s ease both; }
+@keyframes blueprint { 0% { opacity: 0; stroke-dasharray: 0 100; } 12% { opacity: 1; } 55% { stroke-dasharray: 100 0; } 75% { opacity: 1; } 100% { opacity: 0; stroke-dasharray: 100 0; } }
+
+.pool { animation: pool 4s ease-in-out infinite; }
+@keyframes pool { 50% { opacity: .55; } }
+
+.holo { animation: holo 5.2s ease-in-out infinite; animation-delay: var(--d, 0ms); }
+@keyframes holo { 0%, 100% { opacity: .92; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-4px); } }
+
+.stream { stroke-dasharray: .1 7; animation: stream 1.3s linear infinite; animation-delay: var(--d, 0ms); }
+@keyframes stream { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+
+.card { animation: card 6.4s cubic-bezier(.3,.7,.3,1) infinite; animation-delay: var(--d, 0ms); }
+@keyframes card { 0%, 6% { opacity: 0; transform: translateY(10px); } 16%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-6px); } }
+.check { transform-box: fill-box; transform-origin: center; animation: check 6.4s cubic-bezier(.3,.7,.4,1.4) infinite; animation-delay: var(--d, 0ms); }
+@keyframes check { 0%, 30% { transform: scale(0); } 38%, 100% { transform: scale(1); } }
+
+.orbit { animation: orbit 9s linear infinite; }
+.orbit[data-reverse='true'] { animation-direction: reverse; animation-duration: 12s; }
+@keyframes orbit { to { transform: rotate(360deg); } }
+
+.ring { transform-box: fill-box; transform-origin: 0% 50%; opacity: 0; animation: ring 2.4s cubic-bezier(.2,.6,.3,1) infinite; animation-delay: calc(var(--i, 0) * 420ms); }
+@keyframes ring { 0% { opacity: 0; transform: scale(.7); } 22% { opacity: .95; } 100% { opacity: 0; transform: scale(1.22); } }
+
+.bar { transform-box: fill-box; transform-origin: 50% 100%; animation: bar 1.2s ease-in-out infinite alternate; animation-delay: calc(var(--i, 0) * -110ms); }
+.barMid { transform-box: fill-box; transform-origin: center; animation: bar 1.1s ease-in-out infinite alternate; animation-delay: calc(var(--i, 0) * -90ms); }
+@keyframes bar { from { transform: scaleY(.38); } to { transform: scaleY(1.12); } }
+
+.sweep { animation: sweep 4.2s cubic-bezier(.5,0,.3,1) infinite; }
+@keyframes sweep { 0%, 55% { transform: skewX(-18deg) translateX(0); } 100% { transform: skewX(-18deg) translateX(220px); } }
+
+.led { animation: led 2.2s ease-in-out infinite; animation-delay: calc(var(--i, 0) * 260ms); }
+@keyframes led { 50% { opacity: .3; } }
+
+.spin { transform-box: fill-box; transform-origin: center; animation: orbit 6s linear infinite; }
+.dial { animation: dial 3.6s cubic-bezier(.45,0,.2,1) infinite alternate; animation-delay: calc(var(--i, 0) * -1.2s); }
+@keyframes dial { from { transform: rotate(-50deg); } to { transform: rotate(60deg); } }
+
+.type { transform-box: fill-box; transform-origin: 0 50%; animation: type 4.8s steps(16, end) infinite; animation-delay: calc(var(--i, 0) * 400ms); }
+@keyframes type { 0% { transform: scaleX(0); } 45%, 100% { transform: scaleX(1); } }
+
+.scan { animation: scan 3.6s ease-in-out infinite alternate; }
+@keyframes scan { from { transform: translateX(0); } to { transform: translateX(var(--travel, 120px)); } }
+
+.drop { animation: drop 3s cubic-bezier(.5,0,.75,0) infinite; animation-delay: calc(var(--i, 0) * 750ms); }
+@keyframes drop { 0% { opacity: 0; transform: translateY(-40px); } 15% { opacity: 1; } 70% { opacity: 1; transform: translateY(60px) scale(.6); } 100% { opacity: 0; transform: translateY(78px) scale(.4); } }
+
+.rise { animation: rise 4.8s cubic-bezier(.3,.7,.3,1) infinite; animation-delay: calc(var(--i, 0) * 600ms); }
+@keyframes rise { 0%, 10% { opacity: 0; transform: translateY(16px); } 25%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-10px); } }
+
+.slide { animation: slide 4.4s cubic-bezier(.4,0,.2,1) infinite; animation-delay: calc(var(--i, 0) * 1.1s); }
+@keyframes slide { 0% { opacity: 0; transform: translate(-60px, -30px); } 20% { opacity: 1; } 70% { opacity: 1; transform: none; } 85%, 100% { opacity: 0; transform: translate(14px, 7px); } }
+
+.float { animation: floaty 5s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -1.3s); }
+@keyframes floaty { 50% { transform: translateY(-6px); } }
+
+.globe { animation: globe 8s linear infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes globe { from { transform: translateX(-34px); } to { transform: translateX(34px); } }
+
+.balance { transform-box: fill-box; transform-origin: 50% 0; animation: balance 5s ease-in-out infinite; }
+@keyframes balance { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+.drive { animation: drive 3.2s ease-in-out infinite alternate; }
+@keyframes drive { from { transform: translate(-6px, -3px); } to { transform: translate(6px, 3px); } }
+.pulse { stroke-dasharray: 100; animation: pulse 2.6s linear infinite; }
+@keyframes pulse { from { stroke-dashoffset: 100; } to { stroke-dashoffset: -100; } }
+
+.scene[data-running='false'] *, .scene[data-running='false'] *::before { animation-play-state: paused !important; }
+/* The one-time build always completes, even when continuous motion is paused. */
+.scene[data-running='false'] .part, .scene[data-running='false'] .blueprint, .scene[data-running='false'] .drone, .scene[data-running='false'] .tether, .scene[data-running='false'] .downwash, .scene[data-running='false'] .spark, .scene[data-running='false'] .sweepLight { animation-play-state: running !important; }
+@media (scripting: none), (prefers-reduced-motion: reduce) {
+  .scene *, .scene *::before, .scene *::after { animation: none !important; transition: none !important; }
+  .card, .check, .holo, .rise, .slide, .part { opacity: 1 !important; transform: none !important; }
+  .blueprint { opacity: 0 !important; }
+  .drone, .spark, .sweepLight { display: none !important; }
+  .drop { opacity: 0 !important; }
+}

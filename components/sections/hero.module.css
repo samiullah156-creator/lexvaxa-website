@@ -1,0 +1,205 @@
+.hero { --hero-ink: var(--brand-ink); --hero-muted: var(--muted); --hero-line: var(--line); --hero-blue: var(--brand-blue-strong); background: var(--paper, #fafafa); color: var(--hero-ink); border-bottom: 1px solid var(--hero-line); overflow: clip; }
+.inner { display: grid; grid-template-columns: minmax(0, .96fr) minmax(0, .92fr) minmax(0, 1.04fr); grid-template-areas: 'copy machine focus'; align-items: center; gap: clamp(20px, 2.4vw, 40px); width: min(1344px, calc(100% - 80px)); min-height: clamp(560px, calc(100svh - 84px), 680px); margin: 0 auto; padding: 32px 0 36px; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* Message */
+.copy { grid-area: copy; min-width: 0; }
+.eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 24px; color: var(--hero-muted); font: 500 .66rem/1.6 var(--font-code, monospace); letter-spacing: .08em; text-transform: uppercase; }
+.eyebrow > span { display: flex; align-items: center; gap: 4px; width: 29px; flex-shrink: 0; }
+.eyebrow > span::before, .eyebrow > span::after { content: ''; height: 2px; }
+.eyebrow > span::before { width: 16px; background: var(--brand-blue); }
+.eyebrow > span::after { width: 9px; background: var(--brand-purple); }
+.title { margin: 0; font-size: clamp(2.3rem, 3.15vw, 3.25rem); font-weight: 600; line-height: 1.08; letter-spacing: -.047em; }
+.titlePrefix { display: block; font-weight: 450; }
+.phrase { position: relative; display: grid; min-height: 1.14em; margin-top: .04em; color: var(--hero-blue); white-space: nowrap; }
+.phraseIn, .phraseOut, .nodes { grid-area: 1 / 1; }
+.glyph { display: inline-block; white-space: pre; transform-origin: 50% 78%; }
+.period { display: inline-block; color: var(--brand-purple-strong); transform-origin: 50% 78%; }
+.phraseOut .glyph, .phraseOut .period { animation: glyphOut 320ms cubic-bezier(.55,0,.75,.3) both; animation-delay: calc(var(--i, 12) * 11ms); }
+.phraseIn[data-entering='true'] .glyph { animation: glyphIn 560ms cubic-bezier(.2,.75,.25,1) both; animation-delay: calc(330ms + var(--i) * 17ms); }
+.phraseIn[data-entering='true'] .period { animation: glyphIn 480ms cubic-bezier(.2,.75,.25,1) 560ms both; }
+@keyframes glyphOut {
+  0% { opacity: 1; transform: none; }
+  55% { opacity: 1; color: var(--brand-purple); transform: translateY(.05em) scale(.42); }
+  100% { opacity: 0; color: var(--brand-purple); transform: translateY(.08em) scale(.12); }
+}
+@keyframes glyphIn {
+  0% { opacity: 0; color: var(--brand-purple); transform: translateY(.12em) scale(.14); }
+  35% { opacity: 1; }
+  72% { color: var(--hero-blue); transform: translateY(-.015em) scale(1.02); }
+  100% { opacity: 1; transform: none; }
+}
+.nodes { display: flex; gap: .2em; align-self: end; margin-bottom: .28em; pointer-events: none; }
+.nodes i { width: .12em; height: .12em; border-radius: 50%; background: var(--brand-purple); opacity: 0; animation: nodeTravel 640ms cubic-bezier(.4,0,.2,1) both; }
+.nodes i:nth-child(2) { animation-delay: 60ms; }
+.nodes i:nth-child(3) { animation-delay: 120ms; }
+@keyframes nodeTravel { 0% { opacity: 0; transform: translateX(.2em); } 25% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; transform: translateX(4.2em); } }
+
+.lead { max-width: 410px; margin: 24px 0 0; color: var(--hero-muted); font-size: 1rem; line-height: 1.75; text-wrap: pretty; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 30px; }
+.primaryCta, .secondaryCta { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 48px; font-size: .84rem; font-weight: 550; line-height: 1.4; text-decoration: none; }
+.primaryCta { padding: 12px 20px; border: 1px solid var(--hero-blue); border-radius: 28px; background: var(--hero-blue); color: #fff; transition: background-color 160ms, border-color 160ms; }
+.primaryCta:hover { background: var(--brand-purple-strong); border-color: var(--brand-purple-strong); }
+.secondaryCta { gap: 7px; color: var(--hero-ink); }
+.secondaryCta:hover { color: var(--hero-blue); }
+.actions svg { flex-shrink: 0; transition: transform 180ms cubic-bezier(.2,.7,.3,1); }
+.actions a:hover svg { transform: translate(2px, -2px); }
+
+/* Mechanism */
+.machine { grid-area: machine; position: relative; min-width: 0; margin: 0; }
+
+/* Service in focus */
+.focus { grid-area: focus; min-width: 0; }
+.focusHeader { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--hero-line); color: var(--hero-muted); font: 500 .64rem/1.6 var(--font-code, monospace); letter-spacing: .07em; text-transform: uppercase; }
+.focusHeader > span:first-child { color: #43525d; }
+.counter b { color: var(--hero-ink); font-weight: 650; }
+.stage { position: relative; margin: 8px 0 2px; touch-action: pan-y; transition: opacity 280ms ease; }
+.stage[data-standby='true'] { opacity: .65; }
+.stageStatus { position: absolute; left: 0; bottom: 4px; color: var(--hero-blue); font: 500 .62rem/1.4 var(--font-code, monospace); letter-spacing: .05em; text-transform: uppercase; }
+.chain { display: flex; flex-direction: column; gap: 8px; padding: 11px 0 12px; border-top: 1px solid var(--hero-line); }
+.chainLabel { flex: none; color: var(--hero-muted); font: 500 .6rem/1.4 var(--font-code, monospace); letter-spacing: .06em; text-transform: uppercase; }
+.chain ol { display: flex; align-content: start; flex-wrap: wrap; gap: 6px 18px; min-height: 62px; margin: 0; padding: 0; list-style: none; }
+.chain li { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; border: 1px solid var(--hero-line); border-radius: 4px; background: #fff; color: var(--hero-ink); font-size: .8rem; font-weight: 550; line-height: 1.5; white-space: nowrap; animation: chainIn 380ms cubic-bezier(.2,.7,.3,1) both; animation-delay: calc(500ms + var(--i) * 140ms); }
+.chain li:first-child { border-left: 2px solid var(--brand-blue); }
+.chain li:last-child { border-right: 2px solid var(--brand-purple); }
+.chain li:not(:last-child)::after { content: ''; position: absolute; left: calc(100% + 3px); top: 50%; width: 12px; height: 1px; background: #9aaec6; transform-origin: left; animation: wire 260ms ease-out both; animation-delay: calc(640ms + var(--i) * 140ms); }
+@keyframes chainIn { from { opacity: 0; transform: translateX(-4px); } }
+@keyframes wire { from { transform: scaleX(0); } }
+.focusCopy { min-height: 9.4rem; padding: 12px 0 14px; border-top: 1px solid var(--hero-line); animation: copyIn 420ms cubic-bezier(.2,.7,.3,1) both; }
+@keyframes copyIn { from { opacity: 0; transform: translateY(5px); } }
+@keyframes detailIn { from { opacity: .6; transform: translateY(6px); } }
+.focusCopy h2 { margin: 0 0 8px; font-size: clamp(1.25rem, 1.6vw, 1.5rem); font-weight: 600; letter-spacing: -.03em; line-height: 1.25; }
+.serviceLink { display: flex; align-items: center; justify-content: space-between; gap: 14px; color: var(--hero-ink); text-decoration: none; }
+.serviceLink > svg { flex: none; margin-top: 4px; color: var(--hero-blue); transition: transform 180ms cubic-bezier(.2,.7,.3,1); }
+.serviceLink:hover { color: var(--hero-blue); }
+.serviceLink:hover > svg { transform: translate(2px, -2px); }
+.focusCopy p { margin: 0; color: var(--hero-muted); font-size: .9rem; line-height: 1.7; }
+.navigation { display: flex; align-items: center; gap: 6px; padding-top: 10px; border-top: 1px solid var(--hero-line); }
+.navButton { display: grid; flex: none; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid #dfe5eb; border-radius: 50%; background: #fff; color: #465d6d; cursor: pointer; touch-action: manipulation; transition: background-color 150ms, border-color 150ms, color 150ms; }
+.navButton:hover { border-color: #c2d0dc; color: var(--hero-blue); background: var(--brand-blue-soft); }
+.navButton:disabled { opacity: .4; cursor: default; }
+.segments { display: grid; flex: 1; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 4px; min-width: 0; margin: 0 4px; }
+.segment { position: relative; height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; touch-action: manipulation; }
+.segment::before, .segmentFill { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 3px; margin-top: -1.5px; border-radius: 2px; }
+.segment::before { background: #dbe2ea; transition: background-color 150ms; }
+.segment:hover::before { background: #b9c7d6; }
+.segment[aria-current='true']::before { background: var(--brand-blue-light); }
+.segment[data-queued='true']::before { background: var(--brand-purple-light); }
+.segmentFill { background: var(--brand-blue); transform: scaleX(0); transform-origin: left; }
+.segment[aria-current='true'] .segmentFill { animation: fill 500ms linear both; animation-play-state: paused; }
+.segment[aria-current='true'] .segmentFill[data-running='true'] { animation-play-state: running; }
+@keyframes fill { to { transform: scaleX(1); } }
+.hero a:focus-visible, .hero button:focus-visible { outline: 2px solid var(--hero-blue); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Text stays mostly visible from first paint so it never delays LCP. */
+  .eyebrow, .lead, .actions { animation: detailIn 560ms cubic-bezier(.2,.7,.3,1) both; }
+  .lead { animation-delay: 80ms; }
+  .actions { animation-delay: 140ms; }
+}
+
+/* Tablet: message on top; mechanism feeds the service panel beside it. */
+@media (max-width: 1179px) {
+  .inner { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); grid-template-areas: 'copy copy' 'machine focus'; gap: 28px 36px; width: min(980px, calc(100% - 56px)); min-height: 0; padding: 36px 0 34px; }
+  .copy { max-width: 700px; }
+  .machine { align-self: start; margin-top: 34px; }
+  .title { font-size: clamp(2.5rem, 5vw, 3.2rem); }
+  .lead { max-width: 560px; }
+}
+
+/* Phone: one column in reading order. */
+@media (max-width: 759px) {
+  .inner { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'copy' 'machine' 'focus'; gap: 18px; width: calc(100% - 40px); max-width: 540px; padding: 30px 0 26px; }
+  .eyebrow { margin-bottom: 18px; font-size: .64rem; letter-spacing: .05em; }
+  .title { font-size: clamp(2.05rem, 9vw, 2.75rem); }
+  .lead { margin-top: 18px; font-size: 1rem; }
+  .actions { margin-top: 22px; gap: 6px 18px; }
+  .machine { width: min(100%, 420px); justify-self: center; margin-top: 6px; align-self: auto; }
+  .focusCopy { min-height: 11.6rem; }
+  .focusCopy p { font-size: .95rem; }
+}
+@media (max-width: 480px) {
+  .actions { flex-direction: column; align-items: stretch; }
+  .primaryCta { width: 100%; }
+  .secondaryCta { justify-content: flex-start; }
+}
+@media (max-width: 370px) {
+  .inner { width: calc(100% - 32px); }
+  .focusCopy { min-height: 13rem; }
+  .segments { gap: 2px; margin: 0; }
+  .navigation { gap: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero *, .hero *::before, .hero *::after { animation: none !important; transition: none !important; }
+  .segment[aria-current='true'] .segmentFill { transform: none; }
+}
+
+.serviceIcon { animation: iconIn 520ms cubic-bezier(.3,.7,.3,1.3) backwards; }
+.serviceName { flex: 1; }
+@keyframes iconIn { from { transform: perspective(300px) rotateX(70deg) rotateY(-30deg) scale(.6); opacity: 0; } }
+.chain li svg { flex: none; color: var(--brand-blue-strong); }
+.chain li:last-child svg { color: var(--brand-purple-strong); }
+
+/* Trust row: proof and next step at a glance, under the calls to action. */
+.trust { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 26px 0 0; padding: 16px 0 0; border-top: 1px solid #e3e8f0; list-style: none; color: var(--hero-muted); font-size: .78rem; line-height: 1.4; max-width: 470px; }
+.trust li { display: inline-flex; align-items: center; gap: 0; white-space: nowrap; }
+.trust .stars { margin-right: 6px; }
+.trust li b { margin-inline: .3em; }
+.trust li b:first-child, .trust .stars + b { margin-left: 0; }
+.trust li + li::before { content: ''; width: 4px; height: 4px; margin-right: 10px; border-radius: 50%; background: #c3cddb; }
+.trust b { color: var(--hero-ink); font-weight: 700; }
+.stars { display: inline-flex; gap: 1px; color: #f5a623; }
+.stars svg { fill: currentColor; }
+@media (prefers-reduced-motion: no-preference) { .trust { animation: detailIn 560ms 200ms cubic-bezier(.2,.7,.3,1) both; } }
+@media (max-width: 600px) { .trust { gap: 8px; flex-direction: column; } .trust li + li::before { display: none; } }
+
+/* Less empty space: the hero is as tall as its content, the copy sits higher, and three delivered
+   projects under the buttons show real work instead of more words. */
+.inner { min-height: 0; padding: 30px 0 34px; }
+.title { font-size: clamp(2.4rem, 3.35vw, 3.5rem); }
+.lead { max-width: 440px; margin-top: 20px; }
+.actions { margin-top: 26px; }
+
+
+
+/* Clean hero: headline, one sentence and two actions, sized to balance the visual beside it. */
+.title { font-size: clamp(2.5rem, 3.6vw, 3.9rem); }
+.lead { max-width: 460px; font-size: 1.06rem; }
+
+/* Automation control: Automated, the arm works under a soft blue light; Manual, the light goes out,
+   the arm stops and the scene turns grey. The control sits in the corner of the visual. */
+.machine::before { content: ''; position: absolute; inset: -6% -10% 4%; z-index: 0; background: var(--glow-image) center / 100% 100% no-repeat; pointer-events: none; transition: opacity 600ms ease; }
+.machine > * { position: relative; z-index: 1; }
+.machine > div:first-child { transition: filter 600ms ease, opacity 600ms ease; }
+.inner[data-power='off'] .machine::before { opacity: 0; }
+.inner[data-power='off'] .machine > div:first-child { filter: grayscale(1) contrast(.92); opacity: .72; }
+.machine > .power { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 2px; }
+.powerText { color: var(--hero-muted); font: 500 .66rem/1.3 var(--font-code, monospace); letter-spacing: .06em; }
+@media (max-width: 759px) { .machine > .power { justify-content: flex-start; } }
+@media (prefers-reduced-motion: reduce) { .machine::before, .machine > div:first-child { transition: none; } }
+
+/* Clean two-column hero: a bold two-tone headline, lead and actions on the left, one focal visual on
+   the right, with even spacing. The service carousel stays in the markup for the showcase logic but is
+   not shown; the services section below presents every service. */
+.inner { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); grid-template-areas: 'copy machine'; gap: clamp(28px, 5vw, 72px); width: min(1220px, calc(100% - 64px)); min-height: clamp(520px, calc(100svh - 84px), 640px); padding: clamp(44px, 6vw, 76px) 0; }
+.focus { display: none; }
+.eyebrow { margin-bottom: 22px; color: var(--brand-blue-strong); font-weight: 600; letter-spacing: .16em; }
+.title { font-size: clamp(2.7rem, 4.7vw, 4.3rem); font-weight: 800; line-height: 1.03; letter-spacing: -.04em; }
+.titlePrefix { font-weight: 800; }
+.lead { max-width: 520px; margin-top: 24px; font-size: 1.1rem; line-height: 1.7; }
+.actions { gap: 12px; margin-top: 34px; }
+.primaryCta, .secondaryCta { min-height: 52px; padding: 13px 22px; border-radius: 8px; font-size: .93rem; font-weight: 700; }
+.primaryCta:hover { background: #084fa9; border-color: #084fa9; }
+.secondaryCta { border: 1px solid #d5dce8; background: #fff; }
+.secondaryCta:hover { border-color: var(--hero-blue); }
+.machine { width: 100%; max-width: 540px; justify-self: end; align-self: center; margin-top: 0; }
+@media (max-width: 1023px) {
+  .inner { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'copy' 'machine'; gap: 26px; width: calc(100% - 48px); max-width: 680px; min-height: 0; padding: 40px 0 36px; }
+  .machine { justify-self: center; max-width: 460px; }
+}
+@media (max-width: 759px) {
+  .inner { width: calc(100% - 40px); padding: 30px 0 28px; }
+  .title { font-size: clamp(2.2rem, 10vw, 2.9rem); }
+  .lead { font-size: 1rem; }
+  .machine { max-width: 380px; }
+}

@@ -1,0 +1,19 @@
+/* Icon tile. A plain white square with a hairline edge: ink glyph, one brand accent.
+   Deliberately flat. Depth on this site belongs to the rendered objects, not to interface icons. */
+.badge {
+  --s: 40px; --glyph-accent: var(--brand-blue);
+  display: inline-grid; flex: none; place-items: center; width: var(--s); height: var(--s);
+  border: 1px solid #d5dbe6; border-radius: 9px; background: #fff; color: var(--brand-ink);
+  transition: background-color 180ms, border-color 180ms, color 180ms, translate 220ms var(--motion-ease, ease);
+}
+.badge[data-tone='purple'] { --glyph-accent: var(--brand-purple); }
+.badge[data-size='sm'] { --s: 32px; border-radius: 8px; }
+.badge[data-size='lg'] { --s: 52px; border-radius: 12px; }
+.face { display: grid; place-items: center; width: 100%; height: 100%; }
+.face svg { width: 56%; height: 56%; }
+/* Hover, keyboard focus and the selected row invert the tile, so the state is unmistakable. */
+.badge:hover, :hover > .badge, :focus-visible > .badge, [aria-selected='true'] > .badge {
+  border-color: var(--brand-night); background: var(--brand-night); color: #fff; --glyph-accent: #8fc0ff; translate: 0 -1px;
+}
+.badge[data-tone='purple']:hover, :hover > .badge[data-tone='purple'], :focus-visible > .badge[data-tone='purple'], [aria-selected='true'] > .badge[data-tone='purple'] { --glyph-accent: #d8bdff; }
+@media (prefers-reduced-motion: reduce) { .badge { transition: none; } .badge:hover, :hover > .badge, :focus-visible > .badge, [aria-selected='true'] > .badge { translate: none; } }

@@ -1,0 +1,153 @@
+/* Enamel, steel and dark-anodised parts share one light direction (top left). */
+.mechanism { display: block; width: 100%; height: auto; overflow: visible; }
+
+.toolShadow { fill: #0b1a2a; }
+.contactShadow { fill: #1b2a3a; opacity: .08; }
+.floor { stroke: #d6dee6; stroke-width: 1; }
+.stationLabel { fill: #7b8794; font: 500 8.5px/1 var(--font-code, monospace); letter-spacing: .12em; }
+
+/* Intake conveyor */
+.belt { fill: url(#lxm-belt); }
+.roller { fill: #8698a8; stroke: #e3e9ef; stroke-width: .8; }
+.rollerSpoke { stroke: #2c3a47; stroke-width: 1; }
+.bracket { fill: none; stroke: #c3ced9; stroke-width: 1; }
+.signalRail { stroke: #d3dce6; stroke-width: 1; stroke-dasharray: 2 4; }
+.inputSignal { fill: none; stroke: var(--brand-blue); stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 10 90; stroke-dashoffset: 100; opacity: 0; }
+.mechanism[data-feed='true'] .inputSignal { animation: feed 620ms cubic-bezier(.3,0,.3,1) 1 both; }
+@keyframes feed { 0% { opacity: 1; stroke-dashoffset: 100; } 85% { opacity: 1; } 100% { opacity: 0; stroke-dashoffset: 40; } }
+
+/* Output dock */
+.dockBody { fill: #e8edf2; stroke: #b7c4d1; stroke-width: 1; stroke-linejoin: round; }
+.dockLip { stroke: #fff; stroke-width: 1.5; }
+.dockIndicator { fill: #cfd8e2; transition: fill 260ms; }
+.mechanism[data-seated='true'] .dockIndicator { fill: var(--brand-purple); }
+.outputLine { stroke: #c9d3de; stroke-width: 1; stroke-dasharray: 2 4; }
+.outputSignal { fill: none; stroke: var(--brand-purple); stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 12 88; stroke-dashoffset: 100; opacity: 0; }
+.mechanism[data-emit='true'] .outputSignal { animation: emit 700ms cubic-bezier(.3,0,.3,1) 1 both; }
+@keyframes emit { 0% { opacity: 1; stroke-dashoffset: 100; } 80% { opacity: 1; } 100% { opacity: 0; stroke-dashoffset: 8; } }
+
+/* Base: polished steel flange and drum, blue accents, black turntable */
+.steelSide { fill: url(#lxm-steelCyl); stroke: #6f7b86; stroke-width: .8; }
+.steelTop { fill: url(#lxm-steelTop); stroke: #8794a0; stroke-width: .8; }
+.blueRing { fill: none; stroke: var(--brand-blue); stroke-width: 2.2; }
+.blueRingGlow { fill: none; stroke: #167dfe; stroke-width: 7; opacity: .24; filter: blur(3px); }
+.statusLed { fill: #22c55e; filter: drop-shadow(0 0 3px #22c55e); }
+.blueBand { fill: url(#lxm-blue); }
+.stud { fill: url(#lxm-steelCyl); stroke: #6f7b86; stroke-width: .5; }
+.studTop { fill: #eef2f5; stroke: #6f7b86; stroke-width: .5; }
+.tick { stroke: #4f5b66; stroke-width: 1.4; stroke-linecap: round; }
+.darkSide { fill: url(#lxm-darkCyl); stroke: #0b0e11; stroke-width: .8; }
+.darkTop { fill: url(#lxm-anod); stroke: #0b0e11; stroke-width: .8; }
+.statusLed { fill: #6b7681; transition: fill 200ms; }
+.mechanism[data-state='moving'] .statusLed { fill: var(--brand-blue); animation: ledBlink 700ms steps(2, jump-none) infinite; }
+@keyframes ledBlink { 50% { opacity: .35; } }
+.mechanism[data-state='holding'] .statusLed { fill: var(--brand-purple); }
+
+/* Shoulder clevis */
+.plateSide path { fill: #c3ccd5; stroke: #99a7b4; stroke-width: .8; }
+.plateBack { fill: #dfe5eb; stroke: #a3b0bd; stroke-width: .8; }
+.plateFront { fill: url(#lxm-white); stroke: #a3b0bd; stroke-width: 1; }
+.motorBody circle, .motorBody path { fill: url(#lxm-darkCyl); }
+
+/* White enamel box links */
+.linkFront { fill: url(#lxm-white); stroke: #a6b3bf; stroke-width: 1; stroke-linejoin: round; }
+.linkTop { fill: #edf1f4; stroke: #a6b3bf; stroke-width: .8; stroke-linejoin: round; }
+.linkSide { fill: #c5ced7; stroke: #9aa8b5; stroke-width: .8; stroke-linejoin: round; }
+.linkPanel { fill: none; stroke: #d3dbe2; stroke-width: 1; stroke-linejoin: round; }
+.linkBevel { fill: none; stroke: #fff; stroke-width: 1.6; stroke-linecap: round; opacity: .95; }
+.linkCrease { fill: none; stroke: #b4c0cb; stroke-width: 1.4; stroke-linecap: round; }
+.logo { fill: #8d9aa7; font: 700 7.5px/1 var(--font-sans, system-ui); letter-spacing: .22em; }
+.linkShine { fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; }
+.linkBolt { fill: #9aa8b5; }
+.moduleFront { fill: url(#lxm-blue); stroke: #0a4fae; stroke-width: .7; }
+.moduleTop { fill: #2b3239; stroke: #0b0e11; stroke-width: .7; }
+.moduleSide { fill: #15191d; stroke: #0b0e11; stroke-width: .7; }
+.wristFrame { fill: #151a1f; stroke: var(--brand-blue); stroke-width: 3.2; stroke-linejoin: round; }
+
+/* Joint drums and caps */
+.cylOutline circle, .cylOutline path { fill: #9aa8b5; stroke: #9aa8b5; stroke-width: 2; }
+.cylBody circle, .cylBody path { fill: url(#lxm-body); }
+.cylBand circle, .cylBand path { fill: url(#lxm-blue); }
+.cap { fill: url(#lxm-cap); stroke: #a6b3bf; stroke-width: .8; }
+.capRing { fill: none; stroke: var(--brand-blue); }
+.hub { fill: url(#lxm-hub); stroke: #07090b; stroke-width: .6; }
+.capChamfer { fill: none; stroke: #fff; stroke-width: 1; opacity: .8; }
+.hubMark { stroke: var(--brand-blue); stroke-width: 1.6; stroke-linecap: round; }
+.hubBolt { fill: url(#lxm-steel); }
+.hubBore { fill: #07090b; stroke: #4a545e; stroke-width: .8; }
+.capGloss { fill: none; stroke: #fff; stroke-width: 1.6; stroke-linecap: round; opacity: .9; }
+
+/* Corrugated conduit with white mounting clips */
+.conduit { fill: none; stroke: #23292f; stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+.conduitRib { fill: none; stroke: #47505a; stroke-width: 7.2; stroke-dasharray: 1.4 2; stroke-linejoin: round; }
+.conduitShine { fill: none; stroke: #9aa5b0; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; opacity: .55; }
+.clipEdge { fill: none; stroke: #9eabb8; stroke-width: 6.4; stroke-linecap: round; }
+.clip { fill: none; stroke: #fdfefe; stroke-width: 4.4; stroke-linecap: round; }
+
+/* Tool: steel wrist with blue rings, steel gripper block, chrome fingers */
+.shaft { fill: url(#lxm-chrome); stroke: #5b6772; stroke-width: .6; }
+.shaftRing { fill: url(#lxm-blue); }
+/* The guide rail and its status light are light steel: nothing dark sits behind the module. */
+.rail { fill: url(#lxm-steelTop); stroke: #8794a0; stroke-width: .7; }
+.railScrew { fill: #b9c3cc; }
+.railStop { fill: url(#lxm-chrome); stroke: #4e5a65; stroke-width: .6; }
+.block { fill: url(#lxm-chrome); stroke: #56626d; stroke-width: .8; }
+.blockTop { fill: #e9eef2; stroke: #6f7b86; stroke-width: .6; }
+.blockSide { fill: url(#lxm-blue); }
+.blockSideAlt { fill: var(--brand-purple); }
+.blockLight { fill: #aab5c0; transition: fill 200ms; }
+.mechanism[data-state='holding'] .blockLight { fill: var(--brand-purple); }
+.jaw { fill: url(#lxm-chrome); stroke: #4e5a65; stroke-width: .8; stroke-linejoin: round; }
+.jawInsert { fill: url(#lxm-blue); }
+.jawPad { fill: #66727e; }
+
+/* Service module: a white enamel slab. Front and back share the same material; depth comes
+   from the lit top face and the shaded side, drawn in the arm's own projection. */
+.chipBody { fill: url(#lxm-chip); stroke: #b5c4d2; stroke-width: 1; }
+.chipTop { fill: #fbfcfe; stroke: #b5c4d2; stroke-width: .8; stroke-linejoin: round; }
+.chipSide { fill: #c3cfdb; stroke: #a9b8c7; stroke-width: .8; stroke-linejoin: round; }
+.chipSheen { fill: none; stroke: #fff; stroke-width: 1.2; stroke-linecap: round; }
+.dockBase { fill: #cfd9e3; stroke: #b2c0ce; stroke-width: 1; }
+.chipTile { fill: #fff; stroke: #cdd6e2; stroke-width: .8; }
+.chipIcon { color: var(--brand-ink); --glyph-accent: var(--brand-blue); }
+/* Back of the module */
+.chipPanel { fill: #eaeff5; stroke: #c2cedb; stroke-width: .8; }
+.chipPanelShade { fill: none; stroke: #aebccb; stroke-width: 1; stroke-linecap: round; opacity: .75; }
+.chipBackBolt { fill: url(#lxm-steel); stroke: #8794a0; stroke-width: .5; }
+.chipBackSlot { fill: none; stroke: #66727e; stroke-width: .9; stroke-linecap: round; }
+.chipConnector { fill: #fff; stroke: #b5c4d2; stroke-width: .8; }
+.chipContact { fill: var(--brand-blue); }
+.chipContact:nth-of-type(even) { fill: var(--brand-purple); }
+.chipText { fill: var(--brand-ink); font: 600 10px/1 var(--font-sans, system-ui); letter-spacing: -.01em; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mechanism * { animation: none !important; transition: none !important; }
+}
+
+/* Platform rings (static, in the SVG). */
+.platformOuter { fill: none; stroke: #c6d4e5; stroke-width: 1; stroke-dasharray: 1.5 5; }
+.platformInner { fill: #167dfe; fill-opacity: .035; stroke: #d3dfed; stroke-width: 1; }
+.liveDot { fill: #9aa6b2; transition: fill 260ms; }
+.mechanism[data-seated='true'] .liveDot { fill: #22c55e; }
+
+/* Looping effects as an HTML layer over the drawing, positioned in percent of the SVG view box
+   (x 22..418, y 136..428). Only transform and opacity animate, so they stay on the GPU. */
+.stage { position: relative; container-type: inline-size; }
+.fx { position: absolute; inset: 0; pointer-events: none; }
+.fx > span { position: absolute; }
+/* Scan pulse around the base: ellipse centred at (220, 413), 192 x 20 units. */
+.scan { left: 25.76%; top: 91.44%; width: 48.48%; height: 6.85%; border: 1.5px solid var(--brand-blue); border-radius: 50%; opacity: 0; will-change: transform, opacity; animation: scan 4.2s cubic-bezier(.2, .6, .3, 1) infinite paused; }
+@keyframes scan { 0% { opacity: .5; transform: scale(.9); } 100% { opacity: 0; transform: scale(1.85); } }
+/* Live pulse behind the dock's status light at (329, 374). */
+.livePulse { left: 76.26%; top: 79.79%; width: 2.53%; aspect-ratio: 1; border-radius: 50%; background: #22c55e; opacity: 0; }
+.mechanism[data-seated='true'][data-live='true'] ~ .fx .livePulse { animation: livePulse 1.8s ease-out infinite; }
+@keyframes livePulse { 0% { opacity: .5; transform: scale(.6); } 100% { opacity: 0; transform: scale(2); } }
+/* Incoming work on the intake belt: starts at (14, 320), 17 x 10 units, rides 104 units right. */
+.packets { inset: 0; }
+.mechanism:not([data-state='rest']) ~ .fx .packets { visibility: hidden; }
+.packet { position: absolute; left: -2.02%; top: 63.01%; display: grid; place-items: center; width: 4.29%; aspect-ratio: 17 / 10; border: 1px solid #9cc3f5; border-radius: 3px; background: #fff; color: var(--brand-blue); opacity: 0; will-change: transform, opacity; animation: packetRide 3.75s linear infinite paused; }
+.packet:nth-child(2) { color: var(--brand-purple); }
+.packet svg { width: 50%; height: 80%; }
+@keyframes packetRide { 0% { opacity: 0; transform: translateX(0); } 14% { opacity: 1; } 78% { opacity: 1; } 100% { opacity: 0; transform: translateX(26.26cqw); } }
+.mechanism[data-live='true'] ~ .fx .scan, .mechanism[data-live='true'] ~ .fx .packet { animation-play-state: running; }
+@media (prefers-reduced-motion: reduce) { .fx { display: none; } }

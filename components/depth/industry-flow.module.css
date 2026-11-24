@@ -1,0 +1,18 @@
+.flow { min-width: 0; padding: 18px 18px 16px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+.caption { margin: 0 0 12px; color: #6b7787; font: 600 .68rem/1.6 var(--font-code); letter-spacing: .1em; text-transform: uppercase; }
+/* A still, numbered sequence: the order is the message, so nothing moves. */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0 0 18px; padding: 0; list-style: none; }
+.steps li { position: relative; display: grid; align-content: start; gap: 8px; padding: 12px 10px 12px 12px; border: 1px solid #e3e9f2; border-radius: 10px; background: var(--paper); }
+/* Chevron between steps */
+.steps li:not(:last-child)::after { content: ''; position: absolute; top: 20px; right: -8px; z-index: 1; width: 7px; height: 7px; border-top: 1.5px solid #9fb0c6; border-right: 1.5px solid #9fb0c6; background: transparent; transform: rotate(45deg); }
+.node { color: #5f6977; font: 600 .7rem/1 var(--font-code); letter-spacing: .06em; }
+.steps li[data-ai='true'] { border-color: var(--brand-purple-light); background: var(--brand-purple-soft); }
+.steps li[data-ai='true'] .node { color: var(--brand-purple-strong); }
+.text { color: var(--brand-ink); font-size: .8rem; font-weight: 600; line-height: 1.35; }
+.systems { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.systems li { padding: 5px 11px; border: 1px solid #dbe6f4; border-radius: 999px; background: #fff; color: #4d5866; font-size: .78rem; font-weight: 600; }
+@media (max-width: 520px) {
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps li:nth-child(2n)::after { display: none; }
+  .text { font-size: .76rem; }
+}

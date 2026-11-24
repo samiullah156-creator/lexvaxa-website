@@ -1,0 +1,42 @@
+/* ROI estimator: intro on the left, inputs and a light brand-blue results card on the right. No animation beyond
+   colour on hover; range fills use a solid track drawn with a background-size, not a gradient. */
+.roi { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(24px, 4vw, 56px); align-items: start; margin-top: clamp(32px, 4.5vw, 52px); padding: clamp(22px, 3vw, 34px); border: 1px solid #dfe8f4; border-radius: 20px; background: #f7faff url('/media/grid-bg.svg') 0 0 / 26px 26px repeat; }
+.intro { display: grid; gap: 12px; }
+.label { display: inline-flex; align-items: center; gap: 7px; margin: 0; color: var(--brand-blue-strong); font: 600 .7rem/1.4 var(--font-code); letter-spacing: .14em; text-transform: uppercase; }
+.intro h2, .intro h3 { margin: 0; color: var(--brand-ink); font-size: clamp(1.35rem, 2.2vw, 1.8rem); font-weight: 760 !important; line-height: 1.18; letter-spacing: -.03em; }
+.intro p:not(.label) { margin: 0; color: var(--muted); font-size: .95rem; line-height: 1.6; }
+
+.panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+.inputs { display: grid; align-content: start; gap: 16px; padding: 18px; border: 1px solid #e2e9f3; border-radius: 16px; background: #fff; }
+.field { display: grid; gap: 8px; }
+.fieldTop { display: flex; justify-content: space-between; gap: 10px; color: #3b4658; font-size: .82rem; font-weight: 600; }
+.fieldTop output { color: var(--brand-ink); font: 700 .82rem/1.4 var(--font-code); white-space: nowrap; }
+.field input[type='range'] { width: 100%; height: 6px; margin: 4px 0; border-radius: 3px; background-color: #e6edf6; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23167dfe'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-size: var(--fill, 50%) 100%; cursor: pointer; appearance: none; }
+.field input[type='range']::-webkit-slider-thumb { width: 20px; height: 20px; border: 3px solid #fff; border-radius: 50%; background: var(--brand-blue-strong); box-shadow: 0 2px 6px #0d1b3a40; appearance: none; }
+.field input[type='range']::-moz-range-thumb { width: 16px; height: 16px; border: 3px solid #fff; border-radius: 50%; background: var(--brand-blue-strong); box-shadow: 0 2px 6px #0d1b3a40; }
+.field input[type='range']:focus-visible { outline: 2px solid var(--brand-blue-strong); outline-offset: 4px; }
+.budget { display: grid; gap: 7px; padding-top: 14px; border-top: 1px dashed #e2e9f3; color: #3b4658; font-size: .82rem; font-weight: 600; }
+.budget input { min-height: 42px; padding: 0 12px; border: 1px solid #d5deea; border-radius: 9px; background: #fbfcfe; color: var(--brand-ink); font: 600 .9rem/1 var(--font-code); }
+.budget input:focus-visible { outline: 2px solid var(--brand-blue-strong); outline-offset: 1px; border-color: transparent; }
+
+.results { display: grid; align-content: start; gap: 14px; padding: 20px; border: 1px solid #cfe0fb; border-top: 4px solid var(--brand-blue); border-radius: 16px; background: #eef5ff; color: #33445c; }
+.big small { display: block; color: #4d6a91; font-size: .78rem; font-weight: 600; }
+.big b { display: block; margin-top: 4px; color: var(--brand-blue-strong); font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; line-height: 1.1; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.results dl { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 0; overflow: hidden; border: 1px solid #d6e4f7; border-radius: 12px; background: #d6e4f7; }
+.results dl > div { display: grid; gap: 3px; padding: 11px 12px; background: #fff; }
+.results dt { color: #5b6f8a; font-size: .7rem; font-weight: 600; }
+.results dd { margin: 0; color: var(--brand-ink); font: 700 .95rem/1.3 var(--font-code); font-variant-numeric: tabular-nums; }
+.note { margin: 0; color: #5b6f8a; font-size: .74rem; line-height: 1.55; }
+.cta { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; padding: 0 16px; border-radius: 9px; background: var(--brand-blue-strong); color: #fff; font-size: .86rem; font-weight: 700; text-decoration: none; transition: background-color 160ms; }
+.cta:hover { background: #0b5fd0; }
+.cta:focus-visible { outline: 2px solid var(--brand-ink); outline-offset: 2px; }
+
+@media (max-width: 1080px) {
+  .roi { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .panel { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta { transition: none; }
+}

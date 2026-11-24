@@ -1,0 +1,120 @@
+/* Careers: a short page that leads to one action (apply). Visual first, text second. */
+
+.hero { padding: clamp(28px, 5vw, 56px) 0 clamp(40px, 6vw, 72px); border-bottom: 1px solid var(--line, #e3e8ef); }
+.heroGrid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.heroGrid h1 { margin: 10px 0 16px; font-size: clamp(2.3rem, 5.2vw, 4.1rem); line-height: 1.02; letter-spacing: -.035em; }
+.heroGrid h1 span { color: var(--brand-blue, #167dfe); }
+.lead { max-width: 34rem; margin: 0 0 26px; font-size: 1.12rem; color: #4a5563; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px 22px; align-items: center; }
+.actions :global(.text-link), .rolesHead :global(.text-link) { margin-top: 0; display: inline-flex; align-items: center; gap: 6px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
+.facts li { padding: 7px 12px; border: 1px solid #dfe5ec; border-radius: 999px; background: #fff; font-size: .86rem; font-weight: 600; color: #2b3542; }
+
+/* Hero visual: three role cards stacked in depth, the front one "open". */
+.stage { position: relative; aspect-ratio: 1 / .86; perspective: 1100px; }
+.deck { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(18deg) rotateZ(-8deg); }
+.card {
+  position: absolute; left: 12%; width: 72%; padding: 18px 20px; border: 1px solid #dbe3ec; border-radius: 18px; background: #fff;
+  box-shadow: 0 1px 0 #fff inset, 0 18px 40px -22px rgba(13, 32, 60, .35);
+  transition: transform 600ms cubic-bezier(.2, .7, .2, 1);
+}
+.card:nth-child(1) { top: 4%; transform: translate3d(9%, 0, -90px); opacity: .7; }
+.card:nth-child(2) { top: 22%; transform: translate3d(4%, 0, -40px); opacity: .88; }
+.card:nth-child(3) { top: 42%; transform: translate3d(0, 0, 0); }
+.stage:hover .card:nth-child(1) { transform: translate3d(12%, -6%, -90px); }
+.stage:hover .card:nth-child(2) { transform: translate3d(6%, -3%, -40px); }
+.cardTop { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.cardTeam { font: 600 .7rem/1 var(--font-code, monospace); letter-spacing: .12em; text-transform: uppercase; color: #6b7684; }
+.cardState { display: inline-flex; align-items: center; gap: 6px; font-size: .74rem; font-weight: 700; color: #12805c; }
+.cardState::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: pulse 2.4s ease-in-out infinite; }
+.cardTitle { margin: 12px 0 14px; font-size: 1.12rem; font-weight: 700; letter-spacing: -.01em; color: var(--brand-ink, #231f20); }
+.cardTags { display: flex; flex-wrap: wrap; gap: 6px; }
+.cardTags span { padding: 4px 9px; border-radius: 7px; background: #f1f5fa; font-size: .74rem; font-weight: 600; color: #3b4654; }
+.cardFoot { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px; border-top: 1px dashed #dfe5ec; }
+.avatars { display: flex; }
+.avatars i { width: 26px; height: 26px; margin-left: -7px; border: 2px solid #fff; border-radius: 50%; background: #dbe8ff; }
+.avatars i:first-child { margin-left: 0; background: #167dfe; }
+.avatars i:nth-child(2) { background: #9533fa; }
+.avatars i:nth-child(3) { background: #1d1726; }
+.cardCta { font-size: .8rem; font-weight: 700; color: var(--brand-blue, #167dfe); }
+.floor { position: absolute; left: 14%; right: 6%; bottom: 2%; height: 14%; border-radius: 50%; background: #0d203c; opacity: .08; filter: blur(18px); }
+@keyframes pulse { 50% { opacity: .35; } }
+
+/* Principles: four tiles with a drawn mark each, very little text. */
+.principles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 30px; }
+.principle { position: relative; padding: 22px 20px 24px; border: 1px solid #e1e7ee; border-radius: 18px; background: #fff; transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+.principle:hover { transform: translateY(-4px); border-color: #c9d6e6; box-shadow: 0 22px 40px -28px rgba(13, 32, 60, .45); }
+.principle svg { width: 56px; height: 56px; margin-bottom: 18px; padding: 8px; border-radius: 14px; background: #f1f6fd; color: var(--brand-ink, #231f20); transition: background 220ms, transform 220ms; }
+.principle:hover svg { background: #e3eeff; transform: rotate(-4deg); }
+.principle .accent { stroke: var(--brand-blue, #167dfe); }
+.principle h3 { margin: 0 0 6px; font-size: 1.05rem; }
+.principle p { margin: 0; font-size: .93rem; color: #566170; }
+
+/* Open roles */
+.rolesHead { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; }
+.roles { display: grid; gap: 10px; margin: 28px 0 0; padding: 0; list-style: none; }
+.role { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 24px; align-items: center; padding: 20px 22px; border: 1px solid #e1e7ee; border-radius: 16px; background: #fff; color: inherit; text-decoration: none; transition: border-color 180ms, transform 180ms, box-shadow 180ms; }
+.role:hover, .role:focus-visible { border-color: #9cc3ff; transform: translateY(-2px); box-shadow: 0 16px 34px -26px rgba(13, 32, 60, .5); }
+.role h3 { margin: 0 0 6px; font-size: 1.12rem; }
+.roleMeta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .88rem; color: #5b6676; }
+.roleArrow { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; color: var(--brand-blue, #167dfe); white-space: nowrap; }
+.noRoles { margin-top: 28px; padding: 28px; border: 1px dashed #cfd9e5; border-radius: 18px; background: #fff; }
+.noRoles h3 { margin: 0 0 6px; }
+.noRoles p { margin: 0; color: #566170; }
+
+/* Hiring steps: a horizontal track with numbered stops. */
+.steps { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin: 34px 0 0; padding: 0; list-style: none; counter-reset: step; }
+.steps::before { content: ''; position: absolute; top: 21px; left: 22px; right: 22px; height: 2px; background: #dbe3ec; }
+.steps li { position: relative; counter-increment: step; }
+.steps li::before {
+  content: counter(step, decimal-leading-zero); display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 16px;
+  border: 2px solid #dbe3ec; border-radius: 50%; background: #fff; font: 700 .82rem/1 var(--font-code, monospace); color: var(--brand-ink, #231f20);
+  position: relative; z-index: 1;
+}
+.steps li:first-child::before { border-color: var(--brand-blue, #167dfe); color: var(--brand-blue, #167dfe); }
+.steps h3 { margin: 0 0 6px; font-size: 1.02rem; }
+.steps p { margin: 0; font-size: .92rem; color: #566170; }
+.steps small { display: block; margin-top: 8px; font: 600 .72rem/1 var(--font-code, monospace); letter-spacing: .08em; text-transform: uppercase; color: #8a94a2; }
+
+/* Application */
+.applyGrid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+.applyAside { position: sticky; top: 110px; }
+.applyAside h2 { margin: 8px 0 12px; }
+.applyAside p { color: #4f5a68; }
+.checklist { display: grid; gap: 10px; margin: 20px 0 0; padding: 0; list-style: none; }
+.checklist li { display: flex; gap: 10px; align-items: flex-start; font-size: .95rem; }
+.checklist li::before { content: ''; flex: none; width: 18px; height: 18px; margin-top: 2px; border-radius: 6px; background: #e8f1ff; box-shadow: inset 0 0 0 1.5px var(--brand-blue, #167dfe); }
+.applyCard { padding: clamp(20px, 3vw, 32px); border: 1px solid #e1e7ee; border-radius: 22px; background: #fff; box-shadow: 0 30px 60px -48px rgba(13, 32, 60, .5); }
+
+/* Role detail */
+.detailGrid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+.detailBlock + .detailBlock { margin-top: 34px; }
+.detailBlock h2 { margin: 0 0 14px; font-size: 1.35rem; }
+.detailBlock ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.detailBlock li { position: relative; padding-left: 22px; color: #364150; }
+.detailBlock li::before { content: ''; position: absolute; left: 2px; top: .62em; width: 8px; height: 8px; border-radius: 2px; background: var(--brand-blue, #167dfe); transform: rotate(45deg); }
+.summaryCard { position: sticky; top: 110px; padding: 22px; border: 1px solid #e1e7ee; border-radius: 18px; background: #fff; }
+.summaryCard dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 16px; margin: 0 0 20px; font-size: .93rem; }
+.summaryCard dt { color: #6b7684; }
+.summaryCard dd { margin: 0; font-weight: 600; }
+
+@media (max-width: 980px) {
+  .heroGrid, .applyGrid, .detailGrid { grid-template-columns: 1fr; }
+  .stage { max-width: 520px; width: 100%; margin: 0 auto; }
+  .principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+  .steps::before { display: none; }
+  .applyAside, .summaryCard { position: static; }
+}
+@media (max-width: 560px) {
+  .principles, .steps { grid-template-columns: 1fr; }
+  .role { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .principle, .role { transition: none; }
+  .cardState::before { animation: none; }
+}
+
+/* The tilted deck must never widen the page. */
+.stage { overflow: clip; overflow-clip-margin: 24px; }
+.hero { overflow-x: clip; }

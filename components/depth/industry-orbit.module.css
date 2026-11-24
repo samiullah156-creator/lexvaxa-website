@@ -1,0 +1,20 @@
+/* A ring tilted back into the page; it spins, and every chip spins the other way so it stays upright. */
+.scene { --tilt: 60deg; --spin: 70s; position: relative; width: min(100%, 560px); aspect-ratio: 1 / .86; margin-inline: auto; perspective: 1400px; }
+.floor, .ring { position: absolute; left: 50%; top: 52%; width: 92%; aspect-ratio: 1; transform-style: preserve-3d; }
+.floor { transform: translate(-50%, -50%) rotateX(var(--tilt)); }
+.floor span { position: absolute; inset: 0; border: 1px dashed #167dfe55; border-radius: 50%; }
+.floor span:nth-child(2) { inset: 17%; border-style: solid; border-color: #9533fa33; }
+.floor span:nth-child(3) { inset: 34%; border-color: #167dfe33; background: #ffffffaa; box-shadow: 0 0 60px 10px #167dfe1f; }
+.ring { transform: translate(-50%, -50%) rotateX(var(--tilt)) rotateZ(0deg); animation: spin var(--spin) linear infinite; }
+.slot { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateZ(var(--a)); }
+.pin { position: absolute; left: 100%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; transform: rotateZ(calc(-1 * var(--a))); }
+.chip { position: absolute; display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border: 1px solid #dbe5f2; border-radius: 999px; background: #fff; color: var(--brand-ink); font-size: .78rem; font-weight: 650; white-space: nowrap;
+  box-shadow: 0 16px 30px -18px #0d203c66; transform: rotateZ(0deg) rotateX(calc(-1 * var(--tilt))) translate(-50%, -100%); transform-origin: 0 0; animation: counter var(--spin) linear infinite; backface-visibility: hidden; }
+.core { position: absolute; left: 50%; top: 44%; z-index: 2; display: grid; place-items: center; width: 108px; height: 108px; border: 1px solid #dbe5f2; border-radius: 30px; background: #fff; transform: translate(-50%, -50%);
+  box-shadow: 0 40px 60px -30px #167dfe88, 0 0 0 10px #ffffff99, 0 0 0 11px #167dfe22; animation: float 6s ease-in-out infinite; }
+.core img { width: 60px; height: auto; }
+@keyframes spin { to { transform: translate(-50%, -50%) rotateX(var(--tilt)) rotateZ(360deg); } }
+@keyframes counter { to { transform: rotateZ(-360deg) rotateX(calc(-1 * var(--tilt))) translate(-50%, -100%); } }
+@keyframes float { 50% { transform: translate(-50%, calc(-50% - 8px)); } }
+@media (max-width: 560px) { .scene { width: 92%; } .chip > span:first-child { display: none; } .chip { padding: 5px 9px; font-size: .64rem; } .core { width: 84px; height: 84px; border-radius: 24px; } .core img { width: 46px; } }
+@media (prefers-reduced-motion: reduce) { .ring, .chip, .core { animation: none; } }

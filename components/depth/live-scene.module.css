@@ -1,0 +1,5 @@
+.scene { position: relative; }
+.body { position: relative; transform-style: preserve-3d; }
+.body > svg { position: relative; transform: translateZ(24px); }
+@media (prefers-reduced-motion: reduce) { .body > svg { transform: none; } }
+

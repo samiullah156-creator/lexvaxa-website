@@ -1,0 +1,10 @@
+.section { border-block: 1px solid var(--line); background: #fff; }
+.list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0 auto; padding-block: 0; list-style: none; }
+.list li { display: grid; gap: 4px; padding: clamp(22px, 3vw, 34px) clamp(16px, 3vw, 40px); border-left: 1px solid var(--line); }
+.list li:first-child { padding-left: 0; border-left: 0; }
+.list b { color: var(--brand-ink); font-size: clamp(2rem, 3.4vw, 3rem); font-weight: 700; line-height: 1; letter-spacing: -.045em; }
+.list span { color: var(--muted); font-size: .92rem; }
+@media (max-width: 560px) {
+  .list li { padding: 18px 10px; }
+  .list span { font-size: .78rem; line-height: 1.35; }
+}

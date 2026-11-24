@@ -1,0 +1,17 @@
+.root { min-width: 0; }
+
+/* Keyboard focus must stay visible even during a viewport entrance. */
+.root:focus-within { opacity: 1 !important; }
+
+/* A failed or pending hydration/feature chunk must not leave SSR content hidden.
+   The loaded feature module releases this override for normal Motion playback. */
+:global(html:not([data-motion-ready='true'])) .root {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Server-rendered content stays readable with scripting disabled or reduced
+   motion enabled, before preference detection and hydration have completed. */
+@media (scripting: none), (prefers-reduced-motion: reduce) {
+  .root { opacity: 1 !important; transform: none !important; }
+}

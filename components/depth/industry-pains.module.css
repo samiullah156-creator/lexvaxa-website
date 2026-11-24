@@ -1,0 +1,23 @@
+/* Pain-point matrix: one bordered grid of small cells (problem in bold, fix below). Hover only. */
+.wrap { margin-top: clamp(32px, 4.5vw, 52px); }
+.head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; margin-bottom: 14px; }
+.head h3 { margin: 0; font-size: clamp(1.1rem, 1.6vw, 1.3rem); font-weight: 750 !important; letter-spacing: -.02em; }
+.head p { display: inline-flex; align-items: center; gap: 8px; margin: 0; color: var(--muted); font: 600 .64rem/1 var(--font-code); letter-spacing: .12em; text-transform: uppercase; }
+.head p span { color: #c2410c; }
+.head p i { width: 22px; height: 1px; background: currentColor; }
+
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 0; overflow: hidden; border: 1px solid #e2e9f3; border-radius: 16px; background: #e2e9f3; list-style: none; gap: 1px; }
+.cell { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 12px; padding: 16px 16px 18px; background: #fff; transition: background-color 180ms; }
+.cell:hover { background: #f7faff; }
+.icon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; background: #fff4ed; color: #c2410c; transition: background-color 180ms, color 180ms; }
+.cell:hover .icon { background: var(--brand-blue-strong); color: #fff; }
+.cell b { display: block; color: var(--brand-ink); font-size: .9rem; font-weight: 700; line-height: 1.35; letter-spacing: -.01em; }
+.cell p { margin: 5px 0 0; color: var(--muted); font-size: .8rem; line-height: 1.5; }
+
+@media (max-width: 1080px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .cell { padding: 13px 14px; gap: 11px; }
+  .icon { width: 30px; height: 30px; }
+}
+@media (prefers-reduced-motion: reduce) { .cell, .icon { transition: none; } }

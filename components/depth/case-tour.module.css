@@ -1,0 +1,51 @@
+/* Guided walkthrough over a real screenshot. The spotlight moves between areas (one element, a few times
+   a minute); the progress bar is a single transform animation. */
+.tour { margin-top: clamp(48px, 7vw, 84px); }
+.heading { max-width: 720px; margin-bottom: 26px; }
+.eyebrow { margin: 0 0 10px; color: var(--brand-blue-strong); font: 600 .72rem/1.3 var(--font-code); letter-spacing: .14em; text-transform: uppercase; }
+.heading h2 { margin: 0; font-size: clamp(1.7rem, 3.2vw, 2.4rem); letter-spacing: -.02em; line-height: 1.15; }
+.heading h2 span { color: var(--brand-purple); }
+
+.layout { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+
+.frame { margin: 0; overflow: hidden; border: 6px solid #e8eef6; border-radius: 16px; background: #fff; box-shadow: inset 0 0 0 1px #d6e1ef, 0 30px 60px -40px #0d1b3a80; }
+.shot { position: relative; display: block; overflow: hidden; }
+.shot img { display: block; width: 100%; height: auto; }
+
+.spot { position: absolute; left: var(--x); top: var(--y); width: var(--w); height: var(--h); border: 2px solid var(--brand-blue); border-radius: 10px; box-shadow: 0 0 0 9999px #1b2a4a40, 0 0 0 6px #167dfe33; pointer-events: none; transition: left 650ms cubic-bezier(.2, .7, .2, 1), top 650ms cubic-bezier(.2, .7, .2, 1), width 650ms cubic-bezier(.2, .7, .2, 1), height 650ms cubic-bezier(.2, .7, .2, 1); }
+
+.caption { position: absolute; left: 14px; bottom: 14px; display: flex; align-items: center; gap: 11px; max-width: calc(100% - 28px); padding: 10px 16px 10px 10px; border: 1px solid #dbe6f4; border-radius: 12px; background: #fffffff5; color: var(--brand-ink); font-size: .95rem; font-weight: 700; line-height: 1.3; box-shadow: 0 16px 34px -20px #0d1b3a73; }
+.caption small { display: block; margin-bottom: 2px; color: var(--brand-blue-strong); font: 600 .6rem/1.2 var(--font-code); letter-spacing: .12em; text-transform: uppercase; }
+.badge { display: grid; flex: none; place-items: center; width: 32px; height: 32px; border-radius: 9px; background: var(--brand-blue); color: #fff; font: 700 .9rem/1 var(--font-code); }
+
+.side { display: grid; gap: 12px; }
+.steps { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.step { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 12px; width: 100%; padding: 13px 15px; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink); text-align: left; cursor: pointer; transition: border-color var(--motion-fast), box-shadow var(--motion-fast); }
+.step:hover { border-color: #cfe0f8; }
+.step:focus-visible { outline: 2px solid var(--brand-blue); outline-offset: 2px; }
+.step[aria-current='step'] { border-color: #b7d4ff; box-shadow: inset 3px 0 0 var(--brand-blue), 0 12px 26px -20px #0d1b3a66; }
+.num { padding-top: 2px; color: #6b7280; font: 600 .7rem/1.4 var(--font-code); }
+.step[aria-current='step'] .num { color: var(--brand-blue-strong); }
+.stepText { display: grid; gap: 4px; }
+.stepText b { font-size: .93rem; line-height: 1.35; }
+.stepText span { display: none; color: var(--muted); font-size: .84rem; line-height: 1.5; }
+.step[aria-current='step'] .stepText span { display: block; }
+.progress { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--brand-blue); transform: scaleX(0); transform-origin: left center; }
+.tour[data-playing] .progress { animation: tourProgress 5.2s linear forwards; }
+@keyframes tourProgress { to { transform: scaleX(1); } }
+
+.toggle { display: inline-flex; align-items: center; justify-self: start; gap: 7px; padding: 7px 13px; border: 1px solid #d6e2f2; border-radius: 999px; background: #fff; color: var(--brand-blue-strong); font: 600 .74rem/1.3 var(--font-code); cursor: pointer; }
+.toggle:hover { border-color: var(--brand-blue); }
+.toggle:focus-visible { outline: 2px solid var(--brand-blue); outline-offset: 2px; }
+
+@media (max-width: 980px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .caption { display: none; }
+  .badge { width: 26px; height: 26px; font-size: .78rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spot { transition: none; }
+  .tour .progress { display: none; }
+}
