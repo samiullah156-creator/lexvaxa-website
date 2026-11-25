@@ -1,6 +1,20 @@
-# Lexvaxa website
+<!-- styled:v2 -->
+<div align="center">
 
-The public Lexvaxa website: services, industries, portfolio, insights, careers and contact.
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1d1726,50:167dfe,100:9533fa&height=180&section=header&text=Lexvaxa%20website&fontSize=46&fontColor=ffffff&fontAlignY=36&desc=Open-source%20project&descAlignY=58&descSize=16&animation=fadeIn" width="100%" alt="Lexvaxa website" />
+
+**The public Lexvaxa website: services, industries, portfolio, insights, careers and contact.**
+
+
+<p>
+  <a href="#project-structure">Project structure</a> ·
+  <a href="#getting-started">Getting started</a>
+</p>
+
+</div>
+
+---
+
 Built with Next.js 16 (App Router), React 19 and TypeScript, deployed on Vercel as `lexvaxa-site`.
 
 Static copy lives in this repository. Team members, projects, testimonials and site settings come from the
@@ -74,3 +88,19 @@ scripts/             Verification scripts
 - Page metadata is built with the helpers in `lib/seo.ts`; service, industry, project and insight pages enter `app/sitemap.ts` from their data, while new static pages are added there by hand. The sitemap and `llms.txt` rebuild every 5 minutes (`revalidate = 300`), so CMS content appears without a redeploy.
 - Icons are lucide-react SVGs, never text characters such as → ↗ ✓ (`<ArrowRight size="1em" className="inline-icon" aria-hidden="true" />`).
 - Run `npm run typecheck` and the `verify:*` scripts before pushing. CI runs them on every push.
+
+---
+
+<div align="center">
+
+**Built by [Ch Muhammad Samiullah](https://github.com/samiullah156-creator)** · AI Automation Engineer and Full-Stack Developer at [Lexvaxa](https://lexvaxa.com)
+
+<a href="https://github.com/samiullah156-creator"><img src="https://img.shields.io/badge/More%20projects-181717?style=for-the-badge&logo=github&logoColor=white" alt="More projects" /></a>
+<a href="https://lexvaxa.com/contact"><img src="https://img.shields.io/badge/Work%20with%20me-167dfe?style=for-the-badge&logo=googlecalendar&logoColor=white" alt="Work with me" /></a>
+<a href="https://www.linkedin.com/in/sami-lexvaxa/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+
+<sub>⭐ Star this repo if you found it useful</sub>
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:9533fa,50:167dfe,100:1d1726&height=110&section=footer" width="100%" alt="" />
